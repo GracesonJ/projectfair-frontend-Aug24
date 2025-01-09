@@ -9,7 +9,7 @@ import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 
-function ProductCard() {
+function ProductCard({project}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -19,13 +19,13 @@ function ProductCard() {
             <Card style={{ width: '100%' }} className='shadow border-0 mt-5 mt-md-0'>
                 <Card.Img variant="top" src={projectimg} className='w-100' onClick={handleShow}/>
                 <Card.Body>
-                    <Card.Title className='text-center'>Media Player</Card.Title>
+                    <Card.Title className='text-center'>{project?.title}</Card.Title>
                 </Card.Body>
             </Card>
 
             <Modal show={show} onHide={handleClose} centered size='lg'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Media Player</Modal.Title>
+                    <Modal.Title>{project?.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="container-fluid">
@@ -35,16 +35,16 @@ function ProductCard() {
                             </div>
                             <div className="col-md-6">
                                 <h3>Description</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga ad impedit est incidunt corporis porro esse rerum? Facilis distinctio rem corporis atque tempora aliquid neque est aut obcaecati libero.</p>
+                                <p>{project?.overview}</p>
                                 <h4>Technologies</h4>
-                                <p>React</p>
+                                <p>{project?.language}</p>
                             </div>
                         </div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Link to={''}><FontAwesomeIcon icon={faGithub} className='fa-2x me-3' /></Link>
-                    <Link to={''}><FontAwesomeIcon icon={faGlobe}  className='fa-2x me-3 ms-3'/></Link>
+                    <Link to={project?.github} target='_blank'><FontAwesomeIcon icon={faGithub} className='fa-2x me-3' /></Link>
+                    <Link to={project?.website} target='_blank'><FontAwesomeIcon icon={faGlobe}  className='fa-2x me-3 ms-3'/></Link>
                 </Modal.Footer>
             </Modal>
         </>
