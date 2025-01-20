@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { serverUrl } from '../service/serviceUrl';
+import { height } from '@fortawesome/free-solid-svg-icons/faArrowRight';
 
 
 function ProductCard({project}) {
@@ -17,7 +19,7 @@ function ProductCard({project}) {
     return (
         <>
             <Card style={{ width: '100%' }} className='shadow border-0 mt-5 mt-md-0'>
-                <Card.Img variant="top" src={projectimg} className='w-100' onClick={handleShow}/>
+                <Card.Img style={{height:"200px"}} variant="top" src={`${serverUrl}/upload/${project.projectImage}`} className='w-100' onClick={handleShow}/>
                 <Card.Body>
                     <Card.Title className='text-center'>{project?.title}</Card.Title>
                 </Card.Body>
@@ -31,7 +33,7 @@ function ProductCard({project}) {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-6">
-                                <img src={projectimg} alt="no image" className='w-100' />
+                                <img style={{height:"200px"}} src={`${serverUrl}/upload/${project.projectImage}`} alt="no image" className='w-100' />
                             </div>
                             <div className="col-md-6">
                                 <h3>Description</h3>

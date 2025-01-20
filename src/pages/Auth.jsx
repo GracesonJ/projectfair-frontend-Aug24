@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons/faStackOverflow'
@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { loginApi, requestApi } from '../service/allApi'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { loginResponseContext } from '../context/ContextShare'
 
 function Auth({ register }) {
+  const {setLoginResponse} = useContext(loginResponseContext)
 
   const navigate = useNavigate()
 
@@ -55,7 +57,7 @@ function Auth({ register }) {
       console.log(result);
       if (result.status == 200) {
         toast.success(`Login Successfull`)
-
+        setLoginResponse(true)
         sessionStorage.setItem("existingUsers", JSON.stringify(result.data.existingUsers))
         sessionStorage.setItem("token", result.data.token )
 
@@ -103,7 +105,7 @@ function Auth({ register }) {
                     <input type="text" placeholder='Email ID' className='form-control rounded-0' onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })} />
                   </div>
                   <div className="mb-3">
-                    <input type="text" placeholder='Password' className='form-control rounded-0' onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })} />
+                    <input type="password" placeholder='Password' className='form-control rounded-0' onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })} />
                   </div>
                   <div className="mb-3">
 

@@ -23,11 +23,27 @@ export const homeProjectApi = async()=>{
 }
 
 //all projects
-export const allProjectApi = async()=>{
-    return await commonApi('GET', `${serverUrl}/all-project`)
+// query parameter - baseurl?key = value
+export const allProjectApi = async(searchKey, reqHeader)=>{
+    return await commonApi('GET', `${serverUrl}/all-project?search=${searchKey}`,"",reqHeader)
 }
 
 // all user projects
-export const allUserProjectApi = async(reqHeader)=>{
+export const userProjectApi = async(reqHeader)=>{
     return await commonApi('GET', `${serverUrl}/user-project`,"",reqHeader)
+}
+
+//api to remove user projects
+export const removeUserProjectApi = async(id, reqHeader)=>{
+    return await commonApi('DELETE', `${serverUrl}/remove-userproject/${id}`,{}, reqHeader)
+}
+
+//api to update user Project
+export const updateUserProjectApi = async(id, reqBody, reqHeader)=>{
+    return await commonApi('PUT', `${serverUrl}/update-userProject/${id}`, reqBody, reqHeader)
+}
+
+//api to update user profile
+export const updateUserProfileApi = async(reqBody, reqHeader)=>{
+    return await commonApi("put", `${serverUrl}/update-userProfile`, reqBody, reqHeader)
 }
